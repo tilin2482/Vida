@@ -18,6 +18,8 @@
   --line: rgba(90,75,60,.16);
   --accent: #8a7865;
   --max-width: 680px;
+  --vignette: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(138,120,101,0.05) 100%);
+  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
 }
 
 *,
@@ -33,23 +35,48 @@ html{
 }
 
 body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:"Cormorant Garamond", Georgia, serif;
-  font-size:1.34rem;
-  line-height:2.05;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-  overflow-x:hidden;
-  transition: background .4s ease, color .4s ease;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.25rem;
+  line-height: 2.05;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  position: relative;
+  transition: background 0.8s cubic-bezier(0.25, 1, 0.5, 1), color 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: var(--vignette);
+  pointer-events: none;
+  z-index: 10;
+  transition: background 0.8s ease;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-image: var(--grain);
+  pointer-events: none;
+  z-index: 11;
 }
 
 body.dark{
-  --bg:#171411;
-  --text:#ece5da;
-  --muted:#b8ab9a;
-  --line:rgba(255,255,255,.08);
-  --accent:#c5a98c;
+  --bg: #13110f;
+  --text: #ece5da;
+  --muted: #9e9182;
+  --line: rgba(255,255,255,.06);
+  --accent: #c5a98c;
+  --vignette: radial-gradient(circle, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%);
+}
+
+body.dark::after {
+  opacity: 0.6;
 }
 
 .progress{
@@ -57,7 +84,7 @@ body.dark{
   top:0;
   left:0;
   width:100%;
-  height:2px;
+  height:3px;
   background:transparent;
   z-index:1000;
 }
@@ -66,7 +93,8 @@ body.dark{
   width:0%;
   height:100%;
   background:var(--accent);
-  transition:width .08s linear;
+  transition:width .1s linear;
+  box-shadow: 0 0 8px var(--accent);
 }
 
 .container{
@@ -74,29 +102,44 @@ body.dark{
   margin:0 auto;
   padding:5rem 1.5rem 8rem;
   position:relative;
+  z-index:2;
 }
 
 .topbar{
   display:flex;
-  justify-content:flex-end;
-  margin-bottom:2rem;
+  justify-content:space-between;
+  align-items: center;
+  margin-bottom:4rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.5rem;
+}
+
+.read-time {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
 }
 
 .theme-toggle{
   background:transparent;
   border:1px solid var(--line);
   color:var(--muted);
-  padding:.5rem .9rem;
+  padding:.5rem 1.2rem;
   border-radius:999px;
   cursor:pointer;
-  font-size:.9rem;
-  letter-spacing:.03em;
-  transition:all .25s ease;
+  font-size:.8rem;
+  text-transform: uppercase;
+  letter-spacing:.08em;
+  font-weight: 500;
+  transition:all .3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .theme-toggle:hover{
   border-color:var(--accent);
   color:var(--accent);
+  background: rgba(138, 120, 101, 0.05);
 }
 
 .intro{
@@ -104,39 +147,48 @@ body.dark{
 }
 
 h1{
-  font-size:3rem;
-  line-height:1.08;
-  font-weight:500;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size:3.4rem;
+  line-height:1.12;
+  font-weight:600;
   letter-spacing:-0.02em;
-  margin-bottom:1.5rem;
+  margin-bottom:2rem;
+  color: var(--text);
 }
 
 .subtitle{
   color:var(--muted);
-  font-size:1.25rem;
-  line-height:1.8;
+  font-size:1.3rem;
+  line-height:1.85;
+  font-style: italic;
+  border-left: 3px solid var(--accent);
+  padding-left: 1.5rem;
 }
 
 .section{
-  opacity:0;
-  transform:translateY(24px);
-  transition:opacity 1.2s ease, transform 1.2s ease;
-  margin-bottom:6rem;
+  opacity: 0.2;
+  filter: blur(4px);
+  transform: translateY(30px);
+  transition: opacity 1.2s ease, filter 1.2s ease, transform 1.2s ease;
+  margin-bottom: 7rem;
 }
 
-.section.visible{
-  opacity:1;
-  transform:translateY(0);
+.section.focused {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
 }
 
 .section-divider{
   display:flex;
   align-items:center;
-  gap:1rem;
-  margin:5rem 0 3rem;
+  gap:1.5rem;
+  margin:6rem 0 4rem;
   color:var(--muted);
+  font-family: "Playfair Display", Georgia, serif;
   font-style:italic;
-  font-size:1.1rem;
+  font-size:1.25rem;
+  text-align: center;
 }
 
 .section-divider::before,
@@ -148,25 +200,30 @@ h1{
 }
 
 h2{
-  font-size:2rem;
-  line-height:1.2;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size:2.25rem;
+  line-height:1.25;
   font-weight:500;
-  margin-bottom:1.8rem;
+  margin-bottom:2rem;
+  letter-spacing: -0.01em;
   color:var(--text);
 }
 
 p{
-  margin-bottom:1.8rem;
+  margin-bottom:2rem;
 }
 
 .highlight-quote{
-  margin:4rem 0;
-  padding-left:1.4rem;
-  border-left:2px solid var(--accent);
-  color:var(--muted);
-  font-style:italic;
-  font-size:1.25rem;
-  line-height:1.9;
+  margin: 5rem 0;
+  padding: 2.2rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--accent);
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .reading-line{
@@ -176,6 +233,7 @@ p{
   width:1px;
   height:100vh;
   background:var(--line);
+  z-index: 5;
 }
 
 .reading-line::after{
@@ -186,18 +244,20 @@ p{
   width:1px;
   height:var(--line-progress, 0%);
   background:var(--accent);
-  transition:height .08s linear;
+  transition:height .1s linear;
 }
 
 footer{
-  margin-top:8rem;
+  margin-top:10rem;
   color:var(--muted);
-  font-size:1rem;
+  font-size:0.9rem;
   text-align:center;
   line-height:1.8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-@media (max-width:900px){
+@media (max-width:1024px){
   .reading-line{
     display:none;
   }
@@ -205,21 +265,29 @@ footer{
 
 @media (max-width:640px){
   body{
-    font-size:1.14rem;
+    font-size:1.16rem;
     line-height:1.95;
   }
   .container{
     padding:3.5rem 1.2rem 6rem;
   }
+  .topbar {
+    margin-bottom: 2.5rem;
+  }
   h1{
-    font-size:2.2rem;
+    font-size:2.4rem;
   }
   h2{
-    font-size:1.6rem;
+    font-size:1.75rem;
   }
   .highlight-quote {
-    font-size: 1.15rem;
-    margin: 3rem 0;
+    font-size: 1.35rem;
+    margin: 3.5rem 0;
+    padding: 1.5rem 0;
+  }
+  .section-divider {
+    font-size: 1.1rem;
+    margin: 4.5rem 0;
   }
 }
 </style>
@@ -235,6 +303,8 @@ footer{
 <div class="container">
 
   <div class="topbar">
+    <!-- Indicador de tiempo de lectura estimado real -->
+    <span class="read-time" id="readTime">Lectura de 6 min</span>
     <button class="theme-toggle" id="themeToggle">Modo nocturno</button>
   </div>
 
@@ -297,7 +367,7 @@ footer{
 
     <p>Hay otro aspecto que me parece inseparable de esa apuesta por la Colombia profunda: la priorización de lo público, y en particular de la educación superior. Sé que el argumento incomoda a algunos, porque se lee fácilmente como hostilidad hacia el sector privado. No lo es. Es una pregunta de sentido y de justicia: ¿tiene coherencia usar el dinero de todos para financiar becas en instituciones privadas —que inevitablemente llegan a pocos— cuando con los mismos recursos se podría fortalecer la educación pública y llegar a muchos más? En un país tan profundamente desigual como el nuestro, la respuesta no debería ser tan difícil.</p>
 
-    <p>Y es aquí donde aparece la trampa de la meritocracia: funciona bien en teoría, pero la teoría supone una cancha nivelada. En Colombia, no todos parten desde el mismo punto. Mientras unos llegan a la universidad con una educación básica sólida, con tiempo para estudiar, con entornos que no los agobian, otros han estado lidiando desde niños con carencias que no eligieron. Habrá excepciones —siempre las hay—, pero una política pública no puede construirse sobre la excepción. Llamar mérito al resultado de circunstancias tan desiguales es, en el mejor de los casos, una ingenuidad; en el peor, una forma de naturalizarlo que debería indignarnos.</p>
+    <p>Y es aquí donde aparece la trampa de la meritocracia: funciona bien en teoría, pero la teoría supone una cancha nivelada. En Colombia, no todos parten desde el mismo punto. Mientras unos llegan a la universidad con una educación básica sólida, con tiempo para estudiar, con entornos que no los agobian, otros han estado lidiando desde niños con carencias que no elegieron. Habrá excepciones —siempre las hay—, pero una política pública no puede construirse sobre la excepción. Llamar mérito al resultado de circunstancias tan desiguales es, en el mejor de los casos, una ingenuidad; en el peor, una forma de naturalizarlo que debería indignarnos.</p>
 
     <div class="highlight-quote">
       “Habla de una visión de conectividad y desarrollo territorial que va más allá del asfalto como único lenguaje del progreso.”
@@ -345,7 +415,7 @@ footer{
 
     <p>No es que sea perfecto. Ningún político lo es, y el que lo dice miente o simplifica. Pero hay algo en su manera de entender la política —más desde las instituciones que desde la plaza pública, más desde la evidencia que desde el grito— que me parece más sostenible para el momento en que estamos. Un momento en que el proyecto político de la izquierda colombiana necesita menos fuego y más precisión. Menos épica y más estructura.</p>
 
-    <p>Votar por Iván Cepeda no es votar por la continuidad ciega de lo que no funcionó. Es apostar por alguien que entiende qué está en juego, que conoce los límites del poder y que ha demostrado, durante décadas, que se puede hacer política sin rendirse del todo a la maquinaria.</p>
+    <p>Votar por IBM Iván Cepeda no es votar por la continuidad ciega de lo que no funcionó. Es apostar por alguien que entiende qué está en juego, que conoce los límites del poder y que ha demostrado, durante décadas, que se puede hacer política sin rendirse del todo a la maquinaria.</p>
 
     <div class="highlight-quote">
       “Se puede defender una postura sin convertir al que piensa diferente en un enemigo que hay que destruir.”
@@ -363,11 +433,16 @@ const sections = document.querySelectorAll('.section');
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
-      entry.target.classList.add('visible');
+      entry.target.classList.add('focused');
+    } else {
+      if(entry.boundingClientRect.top < 0 || entry.boundingClientRect.bottom > window.innerHeight) {
+         entry.target.classList.remove('focused');
+      }
     }
   });
 },{
-  threshold:0.12
+  rootMargin: "-8% 0px -12% 0px",
+  threshold: 0.1
 });
 
 sections.forEach(section=>observer.observe(section));
@@ -393,6 +468,13 @@ toggle.addEventListener('click', ()=>{
   document.body.classList.toggle('dark');
   const dark = document.body.classList.contains('dark');
   toggle.textContent = dark ? 'Modo claro' : 'Modo nocturno';
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const containerText = document.querySelector('.container').innerText;
+  const words = containerText.trim().split(/\s+/).length;
+  const readingTimeMinutes = Math.ceil(words / 200);
+  document.getElementById('readTime').textContent = `Lectura de ${readingTimeMinutes} min`;
 });
 </script>
 
