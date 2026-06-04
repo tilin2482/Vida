@@ -18,13 +18,16 @@
   --line: rgba(90,75,60,.16);
   --accent: #8a7865;
   --max-width: 680px;
+  
   --vignette: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(138,120,101,0.05) 100%);
   --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
+  
+  --font-multiplier: 1;
+  --letter-spacing-base: normal;
+  --line-height-base: 2.05;
 }
 
-*,
-*::before,
-*::after{
+*, *::before, *::after{
   box-sizing:border-box;
   margin:0;
   padding:0;
@@ -38,8 +41,9 @@ body{
   background: var(--bg);
   color: var(--text);
   font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 1.25rem;
-  line-height: 2.05;
+  font-size: calc(1.25rem * var(--font-multiplier));
+  line-height: var(--line-height-base);
+  letter-spacing: var(--letter-spacing-base);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -79,19 +83,24 @@ body.dark::after {
   opacity: 0.6;
 }
 
+body.high-contrast {
+  --bg: #000000 !important;
+  --text: #ffffff !important;
+  --muted: #ffff00 !important;
+  --accent: #00ffff !important;
+  --line: #ffffff !important;
+  --vignette: none !important;
+}
+
 .progress{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:3px;
+  top:0; left:0; width:100%; height:3px;
   background:transparent;
   z-index:1000;
 }
 
 .progress-bar{
-  width:0%;
-  height:100%;
+  width:0%; height:100%;
   background:var(--accent);
   transition:width .1s linear;
   box-shadow: 0 0 8px var(--accent);
@@ -108,10 +117,22 @@ body.dark::after {
 .topbar{
   display:flex;
   justify-content:space-between;
-  align-items: center;
-  margin-bottom:4rem;
+  align-items: flex-start;
+  margin-bottom:3rem;
   border-bottom: 1px solid var(--line);
   padding-bottom: 1.5rem;
+  gap: 1.5rem;
+}
+
+.topbar-left, .topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.topbar-right {
+  justify-content: flex-end;
 }
 
 .read-time {
@@ -122,37 +143,107 @@ body.dark::after {
   font-weight: 500;
 }
 
-.theme-toggle{
-  background:transparent;
-  border:1px solid var(--line);
-  color:var(--muted);
-  padding:.5rem 1.2rem;
-  border-radius:999px;
-  cursor:pointer;
-  font-size:.8rem;
-  text-transform: uppercase;
-  letter-spacing:.08em;
+.header-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: inherit;
   font-weight: 500;
-  transition:all .3s cubic-bezier(0.25, 1, 0.5, 1);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  transition: all 0.25s ease;
 }
 
-.theme-toggle:hover{
-  border-color:var(--accent);
-  color:var(--accent);
+.header-btn:hover, .header-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
   background: rgba(138, 120, 101, 0.05);
 }
 
-.intro{
-  margin-bottom:5rem;
+.accessibility-wrapper {
+  position: relative;
 }
+
+.accessibility-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 1rem;
+  width: max-content;
+  max-width: calc(100vw - 3rem);
+  display: none;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.accessibility-panel.open {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+.acc-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+  gap: 0.5rem;
+}
+
+.acc-group:last-child {
+  margin-bottom: 0;
+}
+
+.acc-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.acc-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.acc-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.acc-btn:hover, .acc-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(138, 120, 101, 0.05);
+}
+
+.intro{ margin-bottom:5rem; }
 
 h1{
   font-family: "Playfair Display", Georgia, serif;
-  font-size:3.4rem;
-  line-height:1.12;
-  font-weight:600;
-  letter-spacing:-0.02em;
-  margin-bottom:2rem;
+  font-size: 3.4rem;
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
   color: var(--text);
 }
 
@@ -166,7 +257,7 @@ h1{
 }
 
 .section{
-  opacity: 0.2;
+  opacity: 0;
   filter: blur(4px);
   transform: translateY(30px);
   transition: opacity 1.2s ease, filter 1.2s ease, transform 1.2s ease;
@@ -174,142 +265,160 @@ h1{
 }
 
 .section.focused {
-  opacity: 1;
-  filter: blur(0px);
-  transform: translateY(0);
+  opacity: 1; filter: blur(0px); transform: translateY(0);
 }
 
 .section-divider{
-  display:flex;
-  align-items:center;
-  gap:1.5rem;
-  margin:6rem 0 4rem;
-  color:var(--muted);
-  font-family: "Playfair Display", Georgia, serif;
-  font-style:italic;
-  font-size:1.25rem;
-  text-align: center;
+  display:flex; align-items:center; gap:1.5rem; margin:6rem 0 4rem;
+  color:var(--muted); font-family: "Playfair Display", Georgia, serif;
+  font-style:italic; font-size:1.25rem; text-align: center;
 }
 
-.section-divider::before,
-.section-divider::after{
-  content:"";
-  flex:1;
-  height:1px;
-  background:var(--line);
+.section-divider::before, .section-divider::after{
+  content:""; flex:1; height:1px; background:var(--line);
 }
 
 h2{
-  font-family: "Playfair Display", Georgia, serif;
-  font-size:2.25rem;
-  line-height:1.25;
-  font-weight:500;
-  margin-bottom:2rem;
-  letter-spacing: -0.01em;
-  color:var(--text);
+  font-family: "Playfair Display", Georgia, serif; font-size:2.25rem;
+  line-height:1.25; font-weight:500; margin-bottom:2rem; letter-spacing: -0.01em; color:var(--text);
 }
 
-p{
-  margin-bottom:2rem;
+p{ margin-bottom:2rem; }
+
+.reading-highlight {
+  background-color: rgba(138, 120, 101, 0.15);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  transition: background-color 0.4s ease, padding 0.4s ease;
+}
+
+body.dark .reading-highlight {
+  background-color: rgba(197, 169, 140, 0.2);
+}
+
+body.high-contrast .reading-highlight {
+  background-color: #333333;
+  color: #00ffff !important;
 }
 
 .highlight-quote{
-  margin: 5rem 0;
-  padding: 2.2rem 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  color: var(--accent);
-  font-family: "Playfair Display", Georgia, serif;
-  font-style: italic;
-  font-size: 1.6rem;
-  line-height: 1.5;
-  text-align: center;
+  margin: 5rem 0; padding: 2.2rem 0; border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line); color: var(--accent);
+  font-family: "Playfair Display", Georgia, serif; font-style: italic;
+  font-size: 1.6rem; line-height: 1.5; text-align: center;
 }
 
 .reading-line{
-  position:fixed;
-  left:36px;
-  top:0;
-  width:1px;
-  height:100vh;
-  background:var(--line);
-  z-index: 5;
+  position:fixed; left:36px; top:0; width:1px; height:100vh; background:var(--line); z-index: 5;
+}
+.reading-line::after{
+  content:""; position:absolute; top:0; left:0; width:1px; height:var(--line-progress, 0%);
+  background:var(--accent); transition:height .1s linear;
 }
 
-.reading-line::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  width:1px;
-  height:var(--line-progress, 0%);
-  background:var(--accent);
-  transition:height .1s linear;
+.scroll-top-btn {
+  position: fixed; bottom: 2.5rem; right: 2.5rem; width: 50px; height: 50px;
+  border-radius: 50%; background: var(--bg); border: 1px solid var(--line); color: var(--text);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  z-index: 100; opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
+
+.scroll-top-btn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.scroll-top-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-4px); }
 
 footer{
-  margin-top:10rem;
-  color:var(--muted);
-  font-size:0.9rem;
-  text-align:center;
-  line-height:1.8;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  margin-top:10rem; color:var(--muted); font-size:0.9rem; text-align:center;
+  line-height:1.8; letter-spacing: 0.08em; text-transform: uppercase;
 }
 
-@media (max-width:1024px){
-  .reading-line{
-    display:none;
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
+@media (max-width:1024px){ .reading-line{ display:none; } }
+@media (max-width:768px){
+  .topbar { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .topbar-right { justify-content: flex-start; width: 100%; }
+}
 @media (max-width:640px){
-  body{
-    font-size:1.16rem;
-    line-height:1.95;
-  }
-  .container{
-    padding:3.5rem 1.2rem 6rem;
-  }
-  .topbar {
-    margin-bottom: 2.5rem;
-  }
-  h1{
-    font-size:2.4rem;
-  }
-  h2{
-    font-size:1.75rem;
-  }
-  .highlight-quote {
-    font-size: 1.35rem;
-    margin: 3.5rem 0;
-    padding: 1.5rem 0;
-  }
-  .section-divider {
-    font-size: 1.1rem;
-    margin: 4.5rem 0;
-  }
+  body{ font-size: calc(1.16rem * var(--font-multiplier)); line-height: 1.95; }
+  .container{ padding:3.5rem 1.2rem 6rem; }
+  h1{ font-size:2.4rem; } h2{ font-size:1.75rem; }
+  .highlight-quote { font-size: 1.35rem; margin: 3.5rem 0; padding: 1.5rem 0; }
+  .section-divider { font-size: 1.1rem; margin: 4.5rem 0; }
+  .scroll-top-btn { bottom: 1.5rem; right: 1.5rem; width: 44px; height: 44px; }
 }
+
+@keyframes pulseAudio {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; color: var(--accent); }
+  100% { opacity: 1; }
+}
+.header-btn.playing svg { animation: pulseAudio 1.5s infinite ease-in-out; }
 </style>
 </head>
 <body>
 
-<div class="progress">
-  <div class="progress-bar"></div>
-</div>
-
+<div class="progress"><div class="progress-bar"></div></div>
 <div class="reading-line"></div>
+
+<button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver al inicio">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
 
 <div class="container">
 
   <div class="topbar">
-    <!-- Indicador de tiempo de lectura estimado real -->
-    <span class="read-time" id="readTime">Lectura de 6 min</span>
-    <button class="theme-toggle" id="themeToggle">Modo nocturno</button>
+    <div class="topbar-left">
+      <div class="accessibility-wrapper">
+        <button class="header-btn" id="accToggle" aria-label="Abrir panel de accesibilidad">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
+          Accesibilidad
+        </button>
+        <div class="accessibility-panel" id="accPanel">
+          <div class="acc-group">
+            <span class="acc-label">Tamaño de la letra</span>
+            <div class="acc-buttons">
+              <button class="acc-btn active" id="fontNormal">Normal</button>
+              <button class="acc-btn" id="fontLarge">Grande</button>
+              <button class="acc-btn" id="fontXLarge">Muy Grande</button>
+            </div>
+          </div>
+          <div class="acc-group">
+            <span class="acc-label">Espaciado de texto</span>
+            <div class="acc-buttons">
+              <button class="acc-btn active" id="spaceNormal">Normal</button>
+              <button class="acc-btn" id="spaceWide">Amplio</button>
+            </div>
+          </div>
+          <div class="acc-group">
+            <span class="acc-label">Alto Contraste</span>
+            <div class="acc-buttons">
+              <button class="acc-btn" id="highContrastToggle">Activar B/N</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <span class="read-time" id="readTime">Calculando...</span>
+      <button class="header-btn" id="audioBtn" aria-label="Escuchar texto">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="audioIcon"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        <span id="audioText">Escuchar</span>
+      </button>
+      <button class="header-btn" id="themeToggle">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        Nocturno
+      </button>
+    </div>
   </div>
 
   <header class="intro section">
-    <h1>Por qué pienso que votar por Iván Cepeda es la mejor opción</h1>
+    <h1 id="texto-inicio">Por qué pienso que votar por Iván Cepeda es la mejor opción</h1>
 
     <p class="subtitle">
       Hay algo que me resulta difícil de articular, pero que voy a intentar de todas formas. No es fácil escribir sobre política colombiana sin caer en el lugar común, sin sonar como alguien que ya tenía todo decidido desde antes de pensar. Lo que sigue no es un manifiesto ni una defensa ciega. Es, más bien, un intento honesto de entender qué pasó, qué está pasando, y por qué creo que hay una opción que tiene más sentido que las demás.
@@ -367,7 +476,7 @@ footer{
 
     <p>Hay otro aspecto que me parece inseparable de esa apuesta por la Colombia profunda: la priorización de lo público, y en particular de la educación superior. Sé que el argumento incomoda a algunos, porque se lee fácilmente como hostilidad hacia el sector privado. No lo es. Es una pregunta de sentido y de justicia: ¿tiene coherencia usar el dinero de todos para financiar becas en instituciones privadas —que inevitablemente llegan a pocos— cuando con los mismos recursos se podría fortalecer la educación pública y llegar a muchos más? En un país tan profundamente desigual como el nuestro, la respuesta no debería ser tan difícil.</p>
 
-    <p>Y es aquí donde aparece la trampa de la meritocracia: funciona bien en teoría, pero la teoría supone una cancha nivelada. En Colombia, no todos parten desde el mismo punto. Mientras unos llegan a la universidad con una educación básica sólida, con tiempo para estudiar, con entornos que no los agobian, otros han estado lidiando desde niños con carencias que no elegieron. Habrá excepciones —siempre las hay—, pero una política pública no puede construirse sobre la excepción. Llamar mérito al resultado de circunstancias tan desiguales es, en el mejor de los casos, una ingenuidad; en el peor, una forma de naturalizarlo que debería indignarnos.</p>
+    <p>Y es aquí donde aparece la trampa de la meritocracia: funciona bien en teoría, pero la teoría supone una cancha nivelada. En Colombia, no todos parten desde el mismo punto. Mientras unos llegan a la universidad con una educación básica sólida, con tiempo para estudiar, con entornos que no los agobian, otros han estado lidiando desde niños con carencias que no eligieron. Habrá excepciones —siempre las hay—, pero una política pública no puede construirse sobre la excepción. Llamar mérito al resultado de circunstancias tan desiguales es, en el mejor de los casos, una ingenuidad; en el peor, una forma de naturalizarlo que debería indignarnos.</p>
 
     <div class="highlight-quote">
       “Habla de una visión de conectividad y desarrollo territorial que va más allá del asfalto como único lenguaje del progreso.”
@@ -415,7 +524,7 @@ footer{
 
     <p>No es que sea perfecto. Ningún político lo es, y el que lo dice miente o simplifica. Pero hay algo en su manera de entender la política —más desde las instituciones que desde la plaza pública, más desde la evidencia que desde el grito— que me parece más sostenible para el momento en que estamos. Un momento en que el proyecto político de la izquierda colombiana necesita menos fuego y más precisión. Menos épica y más estructura.</p>
 
-    <p>Votar por IBM Iván Cepeda no es votar por la continuidad ciega de lo que no funcionó. Es apostar por alguien que entiende qué está en juego, que conoce los límites del poder y que ha demostrado, durante décadas, que se puede hacer política sin rendirse del todo a la maquinaria.</p>
+    <p>Votar por Iván Cepeda no es votar por la continuidad ciega de lo que no funcionó. Es apostar por alguien que entiende qué está en juego, que conoce los límites del poder y que ha demostrado, durante décadas, que se puede hacer política sin rendirse del todo a la maquinaria.</p>
 
     <div class="highlight-quote">
       “Se puede defender una postura sin convertir al que piensa diferente en un enemigo que hay que destruir.”
@@ -429,52 +538,179 @@ footer{
 
 <script>
 const sections = document.querySelectorAll('.section');
-
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('focused');
-    } else {
+    if(entry.isIntersecting){ entry.target.classList.add('focused'); } 
+    else {
       if(entry.boundingClientRect.top < 0 || entry.boundingClientRect.bottom > window.innerHeight) {
          entry.target.classList.remove('focused');
       }
     }
   });
-},{
-  rootMargin: "-8% 0px -12% 0px",
-  threshold: 0.1
-});
-
+},{ rootMargin: "-8% 0px -12% 0px", threshold: 0.1 });
 sections.forEach(section=>observer.observe(section));
 
 const progressBar = document.querySelector('.progress-bar');
+const scrollTopBtn = document.getElementById('scrollTopBtn');
 
 window.addEventListener('scroll', ()=>{
   const scrollTop = window.scrollY;
   const docHeight = document.body.scrollHeight - window.innerHeight;
   const progress = (scrollTop / docHeight) * 100;
-
   progressBar.style.width = progress + '%';
+  document.documentElement.style.setProperty('--line-progress', progress + '%');
 
-  document.documentElement.style.setProperty(
-    '--line-progress',
-    progress + '%'
-  );
+  if (scrollTop > 400) scrollTopBtn.classList.add('visible');
+  else scrollTopBtn.classList.remove('visible');
 });
 
-const toggle = document.getElementById('themeToggle');
+scrollTopBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-toggle.addEventListener('click', ()=>{
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', ()=>{
   document.body.classList.toggle('dark');
-  const dark = document.body.classList.contains('dark');
-  toggle.textContent = dark ? 'Modo claro' : 'Modo nocturno';
+  const isDark = document.body.classList.contains('dark');
+  themeToggle.innerHTML = isDark 
+    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg> Claro' 
+    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> Nocturno';
+});
+
+const accToggle = document.getElementById('accToggle');
+const accPanel = document.getElementById('accPanel');
+accToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  accPanel.classList.toggle('open');
+  accToggle.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+  if (!accPanel.contains(e.target) && e.target !== accToggle) {
+    accPanel.classList.remove('open');
+    accToggle.classList.remove('active');
+  }
+});
+
+const fontButtons = { normal: document.getElementById('fontNormal'), large: document.getElementById('fontLarge'), xlarge: document.getElementById('fontXLarge') };
+function clearActiveFont() { Object.values(fontButtons).forEach(btn => btn.classList.remove('active')); }
+
+fontButtons.normal.addEventListener('click', () => { clearActiveFont(); fontButtons.normal.classList.add('active'); document.documentElement.style.setProperty('--font-multiplier', '1'); });
+fontButtons.large.addEventListener('click', () => { clearActiveFont(); fontButtons.large.classList.add('active'); document.documentElement.style.setProperty('--font-multiplier', '1.18'); });
+fontButtons.xlarge.addEventListener('click', () => { clearActiveFont(); fontButtons.xlarge.classList.add('active'); document.documentElement.style.setProperty('--font-multiplier', '1.35'); });
+
+const spaceNormal = document.getElementById('spaceNormal'); const spaceWide = document.getElementById('spaceWide');
+spaceNormal.addEventListener('click', () => { spaceNormal.classList.add('active'); spaceWide.classList.remove('active'); document.documentElement.style.setProperty('--letter-spacing-base', 'normal'); document.documentElement.style.setProperty('--line-height-base', '2.05'); });
+spaceWide.addEventListener('click', () => { spaceWide.classList.add('active'); spaceNormal.classList.remove('active'); document.documentElement.style.setProperty('--letter-spacing-base', '0.06em'); document.documentElement.style.setProperty('--line-height-base', '2.3'); });
+
+const highContrastToggle = document.getElementById('highContrastToggle');
+highContrastToggle.addEventListener('click', () => {
+  document.body.classList.toggle('high-contrast');
+  const isHC = document.body.classList.contains('high-contrast');
+  highContrastToggle.classList.toggle('active', isHC);
+  highContrastToggle.textContent = isHC ? 'Desactivar B/N' : 'Activar B/N';
+});
+
+const audioBtn = document.getElementById('audioBtn');
+const audioText = document.getElementById('audioText');
+let synth = window.speechSynthesis;
+let utteranceQueue = [];
+let isSpeaking = false;
+let currentReadingElement = null;
+
+function loadVoices() {
+  const voices = synth.getVoices();
+
+  console.table(voices)
+  const latamVoice = voices.find(v => 
+    v.lang.match(/es-(MX|US|CO|AR|CL|PE|VE)/i) || 
+    v.name.match(/latina|mexico|colombia|argentina/i)
+  );
+  return latamVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
+}
+
+if (synth.onvoiceschanged !== undefined) { synth.onvoiceschanged = loadVoices; }
+
+function speakNextChunk() {
+  if (currentReadingElement) {
+    currentReadingElement.classList.remove('reading-highlight');
+  }
+
+  if (utteranceQueue.length === 0) {
+    stopSpeaking();
+    return;
+  }
+  
+  const chunk = utteranceQueue.shift();
+  currentReadingElement = chunk.element;
+  
+  currentReadingElement.classList.add('reading-highlight');
+  
+  const yOffset = -100; 
+  const y = currentReadingElement.getBoundingClientRect().top + window.scrollY + yOffset;
+  window.scrollTo({ top: y, behavior: 'smooth' });
+
+  const utterance = new SpeechSynthesisUtterance(chunk.text);
+  
+  const selectedVoice = loadVoices();
+  if (selectedVoice) {
+    utterance.voice = selectedVoice;
+    utterance.lang = selectedVoice.lang;
+  } else {
+    utterance.lang = 'es-MX';
+  }
+
+  utterance.onend = () => { speakNextChunk(); };
+  utterance.onerror = (e) => { 
+    console.error("Error en TTS:", e);
+    speakNextChunk();
+  };
+
+  synth.speak(utterance);
+}
+
+function stopSpeaking() {
+  if (currentReadingElement) {
+    currentReadingElement.classList.remove('reading-highlight');
+    currentReadingElement = null;
+  }
+  synth.cancel();
+  utteranceQueue = [];
+  isSpeaking = false;
+  audioBtn.classList.remove('playing', 'active');
+  audioText.textContent = "Escuchar";
+}
+
+audioBtn.addEventListener('click', () => {
+  if (!synth) return alert("Tu navegador no soporta lectura de texto en voz alta.");
+
+  if (isSpeaking) {
+    stopSpeaking();
+  } else {
+    synth.cancel(); 
+    utteranceQueue = [];
+    
+    const textNodes = document.querySelectorAll('.container h1, .container h2, .container p, .container .highlight-quote, .container .section-divider');
+    
+    textNodes.forEach(node => {
+      const txt = node.innerText.trim();
+      if(txt.length > 0) utteranceQueue.push({ text: txt, element: node });
+    });
+
+    if(utteranceQueue.length > 0) {
+      isSpeaking = true;
+      audioBtn.classList.add('playing', 'active');
+      audioText.textContent = "Detener";
+      
+      setTimeout(speakNextChunk, 200);
+    }
+  }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const containerText = document.querySelector('.container').innerText;
-  const words = containerText.trim().split(/\s+/).length;
-  const readingTimeMinutes = Math.ceil(words / 200);
-  document.getElementById('readTime').textContent = `Lectura de ${readingTimeMinutes} min`;
+  const textNodes = document.querySelectorAll('.container h1, .container h2, .container p, .container .highlight-quote');
+  let text = "";
+  textNodes.forEach(n => text += n.innerText + " ");
+  const words = text.trim().split(/\s+/).length;
+  document.getElementById('readTime').textContent = `Lectura de ${Math.ceil(words / 200)} min`;
 });
 </script>
 
