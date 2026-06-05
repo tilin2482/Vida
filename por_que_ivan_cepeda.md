@@ -1,4 +1,4 @@
-# La apuesta honesta
+# La apuesta honesta — mi reflexión sobre por qué voto por Iván Cepeda
 
 ---
 
