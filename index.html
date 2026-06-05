@@ -338,6 +338,50 @@ footer{
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Citations ─────────────────────────────────────────────── */
+.cita {
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--accent);
+  text-decoration: none;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 600;
+  margin-left: 1px;
+  border-bottom: none;
+  transition: opacity 0.2s;
+}
+.cita:hover { opacity: 0.65; }
+
+.referencias {
+  margin-top: 7rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--line);
+}
+.referencias h2 {
+  font-size: 1.6rem;
+  margin-bottom: 2.5rem;
+  color: var(--muted);
+}
+.referencias ol {
+  padding-left: 1.5rem;
+  list-style: decimal;
+}
+.referencias li {
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--muted);
+  margin-bottom: 1.1rem;
+  padding-left: 0.3rem;
+}
+.referencias li a {
+  color: var(--accent);
+  text-decoration: none;
+  word-break: break-all;
+}
+.referencias li a:hover { text-decoration: underline; }
+.ref-anchor { scroll-margin-top: 6rem; }
+
 @media (max-width:1024px){ .reading-line{ display:none; } }
 @media (max-width:768px){
   .topbar { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
@@ -450,7 +494,7 @@ footer{
 
     <p>Hay una reflexión que pocas veces aparece en los debates de seguridad y que yo me he hecho muchas veces: ¿cuántos años llevamos escuchando que la solución a la violencia en Colombia es la mano dura? Más de veinte. Y la violencia sigue ahí, mutada, fraccionada, adaptada. Los grupos que antes tenían ideología hoy son, en su mayoría, estructuras narco con pretextos políticos. Eso no es un logro del Estado; es el resultado acumulado de una estrategia que nunca resolvió el problema de fondo.</p>
 
-    <p>El intento de Petro por retomar el proceso de paz fue, en intención, lo más coherente con esa lectura. Pero los hechos terminaron siendo más complicados que la intención. La fragmentación de los grupos armados hizo casi imposible negociar con alguno sin que otro aprovechara el vacío. La voluntad de paz de los actores armados nunca fue completa. El resultado fue un deterioro de la seguridad que nadie puede negar, y que el propio gobierno tardó en reconocer con la claridad que se requería.</p>
+    <p>El intento de Petro por retomar el proceso de paz fue, en intención, lo más coherente con esa lectura. Pero los hechos terminaron siendo más complicados que la intención. La fragmentación de grupos como el Estado Mayor Central (EMC), la Segunda Marquetalia y el Clan del Golfo hizo casi imposible negociar con alguno sin que otro aprovechara el vacío.<a href="#ref-3" class="cita" id="cite-3">[3]</a><a href="#ref-4" class="cita" id="cite-4">[4]</a> La voluntad de paz de los actores armados nunca fue completa. El resultado fue un deterioro de la seguridad que nadie puede negar —documentado en las alertas tempranas que registran el avance del control territorial de estas economías ilícitas—, y que el propio gobierno tardó en reconocer con la claridad que se requería.<a href="#ref-5" class="cita" id="cite-5">[5]</a></p>
 
     <p>Sin embargo, me resulta difícil —y un poco tramposo— que cuestionemos con tanta energía un proceso de paz que no salió bien, pero que no hayamos hecho la misma pregunta con la misma vehemencia sobre más de sesenta años de políticas de guerra que tampoco funcionaron. No es que el fracaso del proceso deba pasarse por alto. Es que la coherencia intelectual exige hacerse ambas preguntas.</p>
   </section>
@@ -460,9 +504,9 @@ footer{
   <section class="section">
     <h2>La economía: herencia, límites e intenciones</h2>
 
-    <p>Gobernar con un déficit fiscal heredado, con una economía que depende todavía demasiado de los commodities, con una inflación que hay que controlar sin asfixiar el crecimiento, es una tarea que ningún gobierno —de izquierda ni de derecha— puede resolver en cuatro años. Conviene tenerlo presente antes de hacer el balance.</p>
+    <p>Gobernar con un déficit fiscal heredado, con una economía que depende todavía demasiado de los commodities, con una inflación que hay que controlar sin asfixiar el crecimiento, es una tarea que ningún gobierno —de izquierda ni de derecha— puede resolver en cuatro años. Conviene tenerlo presente antes de hacer el balance.<a href="#ref-1" class="cita" id="cite-1">[1]</a></p>
 
-    <p>Las reformas tributarias progresivas que impulsó el gobierno, pensadas para cargar más el peso sobre las economías rentistas y aliviar a las mipymes, encontraron una resistencia parlamentaria que terminó por bloquear o vaciar buena parte de ellas. El intento de diversificar la economía para salir de la dependencia del petróleo —lo que los economistas llaman enfermedad holandesa— fue una apuesta real, aunque sus resultados han sido lentos y parciales. El turismo creció, las exportaciones no tradicionales también, de manera modesta pero visible.</p>
+    <p>Las reformas tributarias progresivas que impulsó el gobierno, pensadas para cargar más el peso sobre las economías rentistas y aliviar a las mipymes, encontraron una resistencia parlamentaria que terminó por bloquear o vaciar buena parte de ellas. El intento de diversificar la economía para salir de la dependencia del petróleo —lo que los economistas llaman enfermedad holandesa— fue una apuesta real, aunque sus resultados han sido lentos y parciales. El turismo creció, las exportaciones no tradicionales también, de manera modesta pero visible.<a href="#ref-2" class="cita" id="cite-2">[2]</a></p>
 
     <p>Lo que sí me genera más dudas es el manejo del déficit fiscal. Sostener la inversión social sin sacrificar el equilibrio macroeconómico es un acto de equilibrio que exige más precisión de la que vimos. No digo que la inversión social no era necesaria —lo era y lo sigue siendo—, sino que el cómo se financia importa, y eso mereció más cuidado del que tuvo.</p>
   </section>
@@ -472,9 +516,9 @@ footer{
   <section class="section">
     <h2>La Colombia que por fin apareció en el mapa</h2>
 
-    <p>Hay algo que me parece difícil negar, aunque uno no comparta todos los métodos ni todas las decisiones: por primera vez, hubo una apuesta real por llevar inversión a regiones que el Estado colombiano siempre había mirado de lejos. La entrega de tierras, aunque lenta y llena de obstáculos burocráticos, fue una señal concreta de que el problema agrario —el corazón de tantos de nuestros conflictos— podía y debía abordarse desde el Estado y no solo desde las armas.</p>
+    <p>Hay algo que me parece difícil negar, aunque uno no comparta todos los métodos ni todas las decisiones: por primera vez, hubo una apuesta real por llevar inversión a regiones que el Estado colombiano siempre había mirado de lejos. La entrega de tierras, aunque lenta y llena de obstáculos burocráticos, fue una señal concreta de que el problema agrario —el corazón de tantos de nuestros conflictos— podía y debía abordarse desde el Estado y no solo desde las armas.<a href="#ref-6" class="cita" id="cite-6">[6]</a></p>
 
-    <p>Hay otro aspecto que me parece inseparable de esa apuesta por la Colombia profunda: la priorización de lo público, y en particular de la educación superior. Sé que el argumento incomoda a algunos, porque se lee fácilmente como hostilidad hacia el sector privado. No lo es. Es una pregunta de sentido y de justicia: ¿tiene coherencia usar el dinero de todos para financiar becas en instituciones privadas —que inevitablemente llegan a pocos— cuando con los mismos recursos se podría fortalecer la educación pública y llegar a muchos más? En un país tan profundamente desigual como el nuestro, la respuesta no debería ser tan difícil.</p>
+    <p>Hay otro aspecto que me parece inseparable de esa apuesta por la Colombia profunda: la priorización de lo público, y en particular de la educación superior.<a href="#ref-7" class="cita" id="cite-7">[7]</a> Sé que el argumento incomoda a algunos, porque se lee fácilmente como hostilidad hacia el sector privado. No lo es. Es una pregunta de sentido y de justicia: ¿tiene coherencia usar el dinero de todos para financiar becas en instituciones privadas —que inevitablemente llegan a pocos— cuando con los mismos recursos se podría fortalecer la educación pública y llegar a muchos más? En un país tan profundamente desigual como el nuestro, la respuesta no debería ser tan difícil.</p>
 
     <p>Y es aquí donde aparece la trampa de la meritocracia: funciona bien en teoría, pero la teoría supone una cancha nivelada. En Colombia, no todos parten desde el mismo punto. Mientras unos llegan a la universidad con una educación básica sólida, con tiempo para estudiar, con entornos que no los agobian, otros han estado lidiando desde niños con carencias que no eligieron. Habrá excepciones —siempre las hay—, pero una política pública no puede construirse sobre la excepción. Llamar mérito al resultado de circunstancias tan desiguales es, en el mejor de los casos, una ingenuidad; en el peor, una forma de naturalizarlo que debería indignarnos.</p>
 
@@ -482,11 +526,11 @@ footer{
       “Habla de una visión de conectividad y desarrollo territorial que va más allá del asfalto como único lenguaje del progreso.”
     </div>
 
-    <p>La apuesta por la transición energética y las fuentes renovables es quizás la más de largo aliento de este gobierno. Nadie espera resultados inmediatos en un proceso de esa escala, pero la dirección importa. Y la idea de priorizar la infraestructura ferroviaria, de reactivar una red que el país casi había olvidado, habla de una visión de conectividad y desarrollo territorial que va más allá del asfalto como único lenguaje del progreso.</p>
+    <p>La apuesta por la transición energética y las fuentes renovables es quizás la más de largo aliento de este gobierno. Nadie espera resultados inmediatos en un proceso de esa escala, pero la dirección importa. Y la idea de priorizar la infraestructura ferroviaria, de reactivar una red que el país casi había olvidado, habla de una visión de conectividad y desarrollo territorial que va más allá del asfalto como único lenguaje del progreso.<a href="#ref-8" class="cita" id="cite-8">[8]</a></p>
 
     <p>Hay otro cambio de enfoque que merece la pena mencionar, aunque rara vez aparezca en los titulares. Durante décadas, los gobiernos midieron el desarrollo de un territorio casi exclusivamente por su PIB o por kilómetros de carretera. Eso dejaba por fuera casi todo lo que importa: si un niño del Chocó podía terminar la primaria, si una madre en La Guajira tenía acceso a agua potable, si un campesino en el Catatumbo moría a los sesenta años por una enfermedad que en Bogotá se cura con una visita al especialista. Este gobierno intentó medir el progreso de otra manera. La adopción del Índice de Pobreza Multidimensional fue más que una decisión técnica: fue una declaración de principios. La pobreza dejó de entenderse como la simple falta de ingresos para convertirse en lo que siempre fue: una madeja de carencias que se refuerzan entre sí.</p>
 
-    <p>Los resultados llegaron. En 2025, por primera vez en la historia, la pobreza multidimensional cayó a un solo dígito: 9,9%. Cerca de 793.000 personas salieron de esa condición. No voy a exagerar: un país con el 10% de su población en esa situación sigue siendo profundamente desigual. Pero la dirección del cambio importa. Y que la reducción no se debiera exclusivamente al crecimiento económico —que fue modesto— sino a inversiones deliberadas en territorios ignorados sugiere que el enfoque no era solo retórica. Los recursos para la alimentación escolar aumentaron, las transferencias monetarias llegaron a más hogares vulnerables, y por primera vez hubo una voluntad real de cerrar las brechas que separan a la Colombia andina de la del Pacífico, la Orinoquia y la Amazonia.</p>
+    <p>Los resultados llegaron. En 2025, por primera vez en la historia, la pobreza multidimensional cayó a un solo dígito: 9,9%. Cerca de 793.000 personas salieron de esa condición.<a href="#ref-9" class="cita" id="cite-9">[9]</a> No voy a exagerar: un país con el 10% de su población en esa situación sigue siendo profundamente desigual. Pero la dirección del cambio importa. Y que la reducción no se debiera exclusivamente al crecimiento económico —que fue modesto— sino a inversiones deliberadas en territorios ignorados sugiere que el enfoque no era solo retórica. Los recursos para la alimentación escolar aumentaron, las transferencias monetarias llegaron a más hogares vulnerables, y por primera vez hubo una voluntad real de cerrar las brechas que separan a la Colombia andina de la del Pacífico, la Orinoquia y la Amazonia.</p>
 
     <p>No todo resultó. Mucho se quedó en el bosquejo. Pero la intención de descentralizar y de voltear los ojos hacia adentro del país no fue retórica vacía.</p>
   </section>
@@ -500,7 +544,7 @@ footer{
 
     <p>Las revoluciones que derivaron en esos regímenes tuvieron algo en común: el uso de la violencia para tomar el poder, la ruptura deliberada de la separación de poderes, la destrucción de los equilibrios macroeconómicos, y el choque frontal con Estados Unidos. Ninguno de esos factores se presentó en Colombia. El Ejército colombiano —históricamente controlado por sectores de derecha y entrenado durante décadas para combatir precisamente guerrillas marxistas— no era un instrumento que un presidente de izquierda pudiera redirigir para consolidar un poder absoluto. Ese escenario apocalíptico que se vendió con tanto éxito era, en los hechos, más una herramienta de pánico electoral que una posibilidad real.</p>
 
-    <p>Paradójicamente, el momento en que Colombia estuvo más cerca de una concentración real del poder no fue durante este gobierno. Fue durante los años de Álvaro Uribe Vélez, cuando la reelección se convirtió en proyecto político y los contrapesos institucionales crujieron de maneras que en ese momento se nos enseñó a no ver.</p>
+    <p>Paradójicamente, el momento en que Colombia estuvo más cerca de una concentración real del poder no fue durante este gobierno. Fue durante los años de Álvaro Uribe Vélez, cuando la reelección se convirtió en proyecto político y los contrapesos institucionales crujieron de maneras que en ese momento se nos enseñó a no ver.<a href="#ref-10" class="cita" id="cite-10">[10]</a><a href="#ref-11" class="cita" id="cite-11">[11]</a></p>
 
     <p>El miedo fue real. La amenaza, no tanto.</p>
   </section>
@@ -522,7 +566,7 @@ footer{
 
     <p>Y aquí llego al punto al que quería llegar desde el principio, aunque me haya tomado este rodeo.</p>
 
-    <p>Iván Cepeda no es un político construido sobre la promesa de la transformación radical ni sobre el carisma de una figura mesiánica. Es algo más difícil de encontrar en la política colombiana: alguien con una trayectoria consistente, con una historia de vida que lo obligó a entender el conflicto, la violencia del Estado y la impunidad desde muy adentro. Hijo de un senador asesinado por paramilitares, defensor de derechos humanos antes de ser legislador, investigador de los crímenes del poder en un momento en que eso representaba un riesgo real y no un mérito de curriculum.</p>
+    <p>Iván Cepeda no es un político construido sobre la promesa de la transformación radical ni sobre el carisma de una figura mesiánica. Es algo más difícil de encontrar en la política colombiana: alguien con una trayectoria consistente, con una historia de vida que lo obligó a entender el conflicto, la violencia del Estado y la impunidad desde muy adentro. Hijo de un senador asesinado por paramilitares,<a href="#ref-12" class="cita" id="cite-12">[12]</a> defensor de derechos humanos antes de ser legislador, investigador de los crímenes del poder en un momento en que eso representaba un riesgo real y no un mérito de curriculum.</p>
 
     <p>Además, hay algo en su estilo político que me parece relevante y que pocas veces se menciona: su disposición genuina al diálogo. No como táctica ni como gesto de campaña, sino como una convicción formada en años de trabajo donde conversar con el adversario era, muchas veces, la única alternativa posible a más violencia. Eso moldea una manera de hacer política distinta a la de Petro: más inclinada a construir acuerdos que a forzar confrontaciones, más atenta a los matices que a los grandes gestos. No digo que uno sea mejor que el otro en términos absolutos, pero sí creo que en este momento del país, con una sociedad todavía cicatrizando, las formas importan tanto como el fondo.</p>
 
@@ -537,6 +581,67 @@ footer{
     <p>Y hay algo más en esa diferencia de estilo que me parece importante nombrar. Cepeda no ha construido su política sobre el espectáculo ni sobre la épica del enfrentamiento. Ha demostrado, a lo largo de su trayectoria, que se puede defender una postura sin convertir al que piensa diferente en un enemigo que hay que destruir. Esa retórica del "destripar" al contendor, tan celebrada en ciertos sectores como señal de carácter, me resulta no solo innecesaria sino genuinamente peligrosa en un país que aún carga con las cicatrices de sus propios odios. Colombia tiene una deuda histórica enorme con la educación, y eso tiene consecuencias: cuando los argumentos escasean, las emociones llenan el espacio. Un liderazgo que aviva ese fuego no está siendo valiente; está siendo irresponsable. Ya hemos visto antes adónde lleva ese camino.</p>
 
     <p>Puede que me equivoque. La política tiene siempre esa posibilidad abierta. Pero de todas las apuestas disponibles, esta me parece la más honesta. Y a veces, en Colombia, eso ya es bastante.</p>
+  </section>
+
+  <section class="referencias section">
+    <h2>Referencias</h2>
+    <ol>
+      <li id="ref-1" class="ref-anchor">
+        <strong>Banco de la República de Colombia.</strong> <em>Informe de Política Monetaria, abril de 2023.</em> La tasa de interés de intervención pasó de 1,75&nbsp;% (septiembre de 2021) a 13,25&nbsp;% (abril de 2023) para contener la inflación. Complementado con: <strong>DANE</strong>, <em>IPC histórico</em>: la inflación anual cerró 2022 en 13,12&nbsp;%, máximo en décadas; y <strong>Portafolio</strong>, <em>déficit histórico del FEPC: $103,9 billones al cierre de 2023</em> (noviembre de 2023), carga fiscal heredada de la administración anterior.
+        <br><a href="https://www.banrep.gov.co/en/monetary-policy-report-april-2023" target="_blank" rel="noopener">banrep.gov.co — Informe de Política Monetaria, abril 2023</a> ·
+        <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/precios-y-costos/indice-de-precios-al-consumidor-ipc/ipc-historico" target="_blank" rel="noopener">dane.gov.co — IPC histórico</a> ·
+        <a href="https://www.portafolio.co/economia/finanzas/fepc-deficit-historico-del-fondo-de-los-combustibles-seria-de-103-9-billones-al-final-de-2023-592025" target="_blank" rel="noopener">Portafolio — Déficit FEPC $103,9 billones (2023)</a>
+      </li>
+      <li id="ref-2" class="ref-anchor">
+        <strong>Presidencia de la República / Ministerio de Comercio, Industria y Turismo.</strong> <em>Colombia rompió nuevo récord en turismo: 6,69 millones de visitantes no residentes en 2024</em> (enero de 2025), un 8,5&nbsp;% más que en 2023, cuando ya se había alcanzado el anterior récord de 5,86 millones (+24,3&nbsp;% respecto a 2022). Fuente base: cifras de Migración Colombia.
+        <br><a href="https://www.presidencia.gov.co/prensa/Paginas/Colombia-rompio-nuevo-record-en-turismo-al-recibir-a-cerca-de-67-millones-de-visitantes-no-residentes-en-2024-250121.aspx" target="_blank" rel="noopener">presidencia.gov.co — Récord turismo 2024</a> ·
+        <a href="https://www.elespectador.com/economia/colombia-tuvo-record-en-turistas-en-2023-que-retos-se-ven-el-horizonte-de-2024-noticias-colombia/" target="_blank" rel="noopener">El Espectador — Récord turismo 2023</a>
+      </li>
+      <li id="ref-3" class="ref-anchor">
+        <strong>INDEPAZ — Observatorio de Derechos Humanos y Conflictividades.</strong> <em>¿Cambios en la Paz Total? Acciones del EMC 2023–2024</em> (julio de 2024). Documenta las acciones del Estado Mayor Central entre enero de 2023 y junio de 2024, y el proceso de atomización de los grupos armados durante la Paz Total. Ver también: <em>Informe anual de violencia 2023</em>, que registra 187 líderes sociales asesinados.
+        <br><a href="https://indepaz.org.co/cambios-en-la-paz-total-acciones-del-emc-2023-2024/" target="_blank" rel="noopener">indepaz.org.co — Acciones del EMC 2023–2024</a> ·
+        <a href="https://indepaz.org.co/violencia-en-colombia-informe-anual-2023/" target="_blank" rel="noopener">indepaz.org.co — Informe anual de violencia 2023</a>
+      </li>
+      <li id="ref-4" class="ref-anchor">
+        <strong>Fundación Ideas para la Paz (FIP).</strong> <em>Paz Total: los grupos armados ganan con cara y con sello</em> (febrero de 2024). Analiza cómo el EMC, la Segunda Marquetalia y el Clan del Golfo consolidaron su control territorial durante el proceso negociador, expandiendo las zonas de disputa de cinco (2022) a al menos nueve subregiones (2023), y poniendo en cuestión la viabilidad de múltiples mesas abiertas simultáneamente.
+        <br><a href="https://ideaspaz.org/publicaciones/investigaciones-analisis/2024-02/paz-total-los-grupos-armados-ganan-con-cara-y-con-sello" target="_blank" rel="noopener">ideaspaz.org — Paz Total: análisis FIP 2024</a>
+      </li>
+      <li id="ref-5" class="ref-anchor">
+        <strong>Defensoría del Pueblo de Colombia — Sistema de Alertas Tempranas.</strong> Desde 2017 hasta 2024 se emitieron 312 Alertas Tempranas en 427 municipios y 22 áreas no municipalizadas. En 2023 se emitieron 39 alertas en 110 municipios de 23 departamentos. La Defensoría identificó al Clan del Golfo (AGC), el EMC, el ELN y la Segunda Marquetalia como los grupos con mayor injerencia territorial, cuyo propósito central es el control poblacional para sostener economías ilícitas: narcotráfico, minería ilegal, extorsión y deforestación.
+        <br><a href="https://www.defensoria.gov.co/en/-/defensor-del-pueblo-presenta-radiograf%C3%ADa-de-ddhh-de-colombia" target="_blank" rel="noopener">defensoria.gov.co — Radiografía de DDHH (2024)</a>
+      </li>
+      <li id="ref-6" class="ref-anchor">
+        <strong>Agencia Nacional de Tierras (ANT).</strong> <em>Reforma Agraria histórica: Gobierno nacional ha formalizado 1,5 millones de hectáreas</em> (mayo de 2025). Entre 2022 y 2024 se adquirieron 166.178 hectáreas para la Reforma Agraria —superando la suma de los dos gobiernos anteriores (Santos: 17.882 has.; Duque: 18.159 has.)— y se formalizaron más de 1,5 millones de hectáreas. Solo en 2024 se gestionaron 186.116 hectáreas, la cifra más alta en la historia del país.
+        <br><a href="https://www.ant.gov.co/prensa/noticias/reforma-agraria-historica-gobierno-nacional-ha-formalizado-1-5-millones-de-hectareas-y-marca-un-antes-y-un-despues-en-el-acceso-a-tierras-en-colombia" target="_blank" rel="noopener">ant.gov.co — Reforma Agraria: 1,5 millones de hectáreas formalizadas</a>
+      </li>
+      <li id="ref-7" class="ref-anchor">
+        <strong>Ministerio de Educación Nacional.</strong> <em>Política de Gratuidad "Puedo Estudiar"</em> (2024). Entre 2023 y 2024, el Gobierno invirtió 4 billones de pesos en gratuidad de matrícula en las 67 Instituciones de Educación Superior públicas, beneficiando a 846.000 estudiantes de pregrado —el 96&nbsp;% del total—. La inversión en funcionamiento de las IES pasó de 6 billones (2022) a 9,8 billones de pesos en 2025, el incremento más alto en la historia del país.
+        <br><a href="https://www.mineducacion.gov.co/portal/salaprensa/Comunicados/421439:En-2024-el-95-de-los-estudiantes-de-educacion-superior-y-10-000-jovenes-de-la-fuerza-publica-accederan-a-la-gratuidad-educativa" target="_blank" rel="noopener">mineducacion.gov.co — Gratuidad educativa 2024</a> ·
+        <a href="https://www.mineducacion.gov.co/portal/salaprensa/Comunicados/423700:El-96-de-los-jovenes-de-pregrado-de-universidades-publicas-en-Colombia-estudian-gratis-y-con-calidad-gracias-al-Gobierno-del-Cambio" target="_blank" rel="noopener">mineducacion.gov.co — 96% estudian gratis (2025)</a>
+      </li>
+      <li id="ref-8" class="ref-anchor">
+        <strong>Agencia Nacional de Infraestructura (ANI) / Presidencia de la República.</strong> <em>Gobierno del presidente Petro proyecta inversión de $60 billones en nuevas vías férreas</em> (enero de 2025). Entre 2023 y 2025 se invirtieron $570.000 millones en recuperación de la red existente; en 2024 se movilizaron más de 225.000 toneladas de carga en el corredor La Dorada–Chiriguaná (+23&nbsp;% respecto a 2023). Se tiene proyectada la concesión de 1.800 km de vías férreas y una licitación histórica del Corredor Férreo Central.
+        <br><a href="https://www.presidencia.gov.co/prensa/Paginas/Gobierno-del-presidente-Petro-proyecta-inversion-de-60-billones-en-nuevas-250103.aspx" target="_blank" rel="noopener">presidencia.gov.co — Inversión $60 billones en red ferroviaria</a>
+      </li>
+      <li id="ref-9" class="ref-anchor">
+        <strong>DANE — Departamento Administrativo Nacional de Estadística.</strong> <em>Pobreza multidimensional en Colombia, año 2025</em> (abril de 2026). La incidencia del IPM cayó al 9,9&nbsp;%, su mínimo histórico desde que se mide el índice, con 793.000 personas saliendo de esa condición respecto a 2024. La reducción estuvo impulsada principalmente por mejoras en indicadores educativos (rezago escolar −2,3&nbsp;pp) y fue estadísticamente significativa en todas las regiones salvo el Caribe.
+        <br><a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/pobreza-y-condiciones-de-vida/pobreza-multidimensional" target="_blank" rel="noopener">dane.gov.co — Pobreza multidimensional</a> ·
+        <a href="https://www.elcolombiano.com/negocios/pobreza-multidimensional-colombia-2025-dane-resultado-NF35477219" target="_blank" rel="noopener">El Colombiano — 793.000 colombianos dejaron de ser pobres (2026)</a>
+      </li>
+      <li id="ref-10" class="ref-anchor">
+        <strong>Corte Constitucional de Colombia.</strong> <em>Sentencia C-141 de 2010</em> (M.P. Humberto Sierra Porto, 26 de febrero de 2010). Declara inexequible la Ley 1354 de 2009 que convocaba a referendo para permitir una segunda reelección presidencial de Álvaro Uribe Vélez, al considerar que sustituía ejes estructurales de la Constitución y alteraba el sistema de frenos y contrapesos, el principio de alternancia y la igualdad entre candidatos.
+        <br><a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=173571" target="_blank" rel="noopener">funcionpublica.gov.co — Sentencia C-141/2010</a>
+      </li>
+      <li id="ref-11" class="ref-anchor">
+        <strong>Corte Suprema de Justicia de Colombia, Sala de Casación Penal.</strong> <em>Caso «Yidispolítica»</em>: condena a los exministros Sabas Pretelt y Diego Palacio (2015, ratificada en 2024) y al exsecretario general de la Presidencia Bernardo Moreno (2023) por el delito de cohecho, al ofrecer prebendas burocráticas a congresistas para asegurar la aprobación de la reforma constitucional de reelección en 2004. La Corte afirmó que hubo una "clara desviación de poder" en dicha reforma.
+        <br><a href="https://www.eltiempo.com/archivo/documento/CMS-15575795" target="_blank" rel="noopener">El Tiempo — Condenas por Yidispolítica (2015)</a> ·
+        <a href="https://www.elcolombiano.com/colombia/corte-suprema-confirma-condenas-a-exfuncionarios-de-uribe-por-caso-yidispolitica-BK25498845" target="_blank" rel="noopener">El Colombiano — Ratificación condena (2024)</a>
+      </li>
+      <li id="ref-12" class="ref-anchor">
+        <strong>Corte Interamericana de Derechos Humanos.</strong> <em>Caso Manuel Cepeda Vargas vs. Colombia</em>. Sentencia de 26 de mayo de 2010 (Serie C No. 213). El tribunal declaró la responsabilidad internacional de Colombia por la ejecución extrajudicial del senador Manuel Cepeda Vargas —último senador electo de la Unión Patriótica— perpetrada el 9 de agosto de 1994 por una estructura criminal compuesta por agentes del Estado y grupos paramilitares, en el marco de un patrón sistemático de violencia contra la UP.
+        <br><a href="https://cejil.org/comunicado-de-prensa/corte-interamericana-condena-a-colombia-por-la-ejecucion-del-senador-manuel-cepeda/" target="_blank" rel="noopener">CEJIL — Sentencia Corte IDH: caso Cepeda Vargas (2010)</a>
+      </li>
+    </ol>
   </section>
 </div>
 
